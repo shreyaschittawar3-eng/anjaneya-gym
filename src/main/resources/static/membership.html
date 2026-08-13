@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Membership | Anjaneya Gym</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <a href="index.html"
+       class="logo">
+
+        ANJANEYA GYM
+
+    </a>
+
+
+    <nav class="nav-links">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="membership.html">
+            Membership
+        </a>
+
+        <a href="dashboard.html">
+            Dashboard
+        </a>
+
+        <a href="login.html">
+            Login
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- ================= MEMBERSHIP HEADER ================= -->
+
+<section class="section">
+
+    <div class="section-header">
+
+        <span class="tag">
+            MEMBERSHIP PLANS
+        </span>
+
+        <h2>
+            Choose Your Gym Plan
+        </h2>
+
+        <p>
+            Select the membership that matches your fitness goals.
+        </p>
+
+    </div>
+
+
+
+    <!-- ================= STRENGTH ================= -->
+
+    <div class="section-header">
+
+        <span class="tag">
+            STRENGTH
+        </span>
+
+        <h2>
+            Strength Training
+        </h2>
+
+        <p>
+            Build strength, muscle and overall fitness with our strength training facilities.
+        </p>
+
+    </div>
+
+
+    <div class="plans-grid">
+
+
+        <!-- STRENGTH ADMISSION -->
+
+        <div class="plan-card">
+
+            <h3>
+                Admission
+            </h3>
+
+            <div class="plan-price">
+
+                ₹200
+
+                <span>
+                    / Admission
+                </span>
+
+            </div>
+
+
+            <ul>
+
+                <li>Gym Admission</li>
+
+                <li>Strength Equipment</li>
+
+                <li>Trainer Guidance</li>
+
+                <li>Gym Orientation</li>
+
+            </ul>
+
+
+            <button
+                class="btn btn-secondary"
+                onclick="goToPayment('Strength Admission', 200)">
+
+                GET STARTED
+
+            </button>
+
+        </div>
+
+
+
+        <!-- STRENGTH MONTHLY -->
+
+        <div class="plan-card popular">
+
+            <span class="popular-label">
+                MOST POPULAR
+            </span>
+
+
+            <h3>
+                Monthly
+            </h3>
+
+
+            <div class="plan-price">
+
+                ₹800
+
+                <span>
+                    / Month
+                </span>
+
+            </div>
+
+
+            <ul>
+
+                <li>Full Gym Access</li>
+
+                <li>Strength Equipment</li>
+
+                <li>Trainer Guidance</li>
+
+                <li>Flexible Gym Timing</li>
+
+                <li>Locker Access</li>
+
+            </ul>
+
+
+            <button
+                class="btn btn-primary"
+                onclick="goToPayment('Strength Monthly', 800)">
+
+                GET STARTED
+
+            </button>
+
+        </div>
+
+
+
+        <!-- STRENGTH 3 MONTHS -->
+
+        <div class="plan-card">
+
+            <h3>
+                3 Months
+            </h3>
+
+
+            <div class="plan-price">
+
+                ₹1850
+
+                <span>
+                    / 3 Months
+                </span>
+
+            </div>
+
+
+            <ul>
+
+                <li>Full Gym Access</li>
+
+                <li>Strength Equipment</li>
+
+                <li>Trainer Guidance</li>
+
+                <li>Flexible Timing</li>
+
+                <li>Long-Term Membership</li>
+
+            </ul>
+
+
+            <button
+                class="btn btn-secondary"
+                onclick="goToPayment('Strength 3 Months', 1850)">
+
+                GET STARTED
+
+            </button>
+
+        </div>
+
+
+
+        <!-- STRENGTH 6 MONTHS -->
+
+        <div class="plan-card">
+
+            <h3>
+                6 Months
+            </h3>
+
+
+            <div class="plan-price">
+
+                ₹4000
+
+                <span>
+                    / 6 Months
+                </span>
+
+            </div>
+
+
+            <ul>
+
+                <li>Full Gym Access</li>
+
+                <li>Strength Equipment</li>
+
+                <li>Trainer Guidance</li>
+
+                <li>Flexible Timing</li>
+
+                <li>Long-Term Membership</li>
+
+            </ul>
+
+
+            <button
+                class="btn btn-secondary"
+                onclick="goToPayment('Strength 6 Months', 4000)">
+
+                GET STARTED
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ================= CARDIO ================= -->
+
+    <div class="section-header"
+         style="margin-top:70px;">
+
+        <span class="tag">
+            CARDIO
+        </span>
+
+        <h2>
+            Cardio Training
+        </h2>
+
+        <p>
+            Improve endurance, stamina and cardiovascular fitness.
+        </p>
+
+    </div>
+
+
+
+    <div class="plans-grid">
+
+
+        <!-- CARDIO ADMISSION -->
+
+        <div class="plan-card">
+
+            <h3>
+                Admission
+            </h3>
+
+
+            <div class="plan-price">
+
+                ₹400
+
+                <span>
+                    / Admission
+                </span>
+
+            </div>
+
+
+            <ul>
+
+                <li>Cardio Gym Admission</li>
+
+                <li>Cardio Equipment</li>
+
+                <li>Trainer Guidance</li>
+
+                <li>Gym Orientation</li>
+
+            </ul>
+
+
+            <button
+                class="btn btn-secondary"
+                onclick="goToPayment('Cardio Admission', 400)">
+
+                GET STARTED
+
+            </button>
+
+        </div>
+
+
+
+        <!-- CARDIO MONTHLY -->
+
+        <div class="plan-card popular">
+
+            <span class="popular-label">
+                MOST POPULAR
+            </span>
+
+
+            <h3>
+                Monthly
+            </h3>
+
+
+            <div class="plan-price">
+
+                ₹1000
+
+                <span>
+                    / Month
+                </span>
+
+            </div>
+
+
+            <ul>
+
+                <li>Full Cardio Access</li>
+
+                <li>Cardio Equipment</li>
+
+                <li>Trainer Guidance</li>
+
+                <li>Flexible Gym Timing</li>
+
+                <li>Locker Access</li>
+
+            </ul>
+
+
+            <button
+                class="btn btn-primary"
+                onclick="goToPayment('Cardio Monthly', 1000)">
+
+                GET STARTED
+
+            </button>
+
+        </div>
+
+
+
+        <!-- CARDIO 3 MONTHS -->
+
+        <div class="plan-card">
+
+            <h3>
+                3 Months
+            </h3>
+
+
+            <div class="plan-price">
+
+                ₹2600
+
+                <span>
+                    / 3 Months
+                </span>
+
+            </div>
+
+
+            <ul>
+
+                <li>Full Cardio Access</li>
+
+                <li>Cardio Equipment</li>
+
+                <li>Trainer Guidance</li>
+
+                <li>Flexible Timing</li>
+
+                <li>Long-Term Membership</li>
+
+            </ul>
+
+
+            <button
+                class="btn btn-secondary"
+                onclick="goToPayment('Cardio 3 Months', 2600)">
+
+                GET STARTED
+
+            </button>
+
+        </div>
+
+
+
+        <!-- CARDIO 6 MONTHS -->
+
+        <div class="plan-card">
+
+            <h3>
+                6 Months
+            </h3>
+
+
+            <div class="plan-price">
+
+                ₹5000
+
+                <span>
+                    / 6 Months
+                </span>
+
+            </div>
+
+
+            <ul>
+
+                <li>Full Cardio Access</li>
+
+                <li>Cardio Equipment</li>
+
+                <li>Trainer Guidance</li>
+
+                <li>Flexible Timing</li>
+
+                <li>Long-Term Membership</li>
+
+            </ul>
+
+
+            <button
+                class="btn btn-secondary"
+                onclick="goToPayment('Cardio 6 Months', 5000)">
+
+                GET STARTED
+
+            </button>
+
+        </div>
+
+
+
+        <!-- SPECIAL TRAINING -->
+
+        <div class="plan-card">
+
+            <h3>
+                Special Training
+            </h3>
+
+
+            <div class="plan-price">
+
+                ₹2500
+
+                <span>
+                    / Training
+                </span>
+
+            </div>
+
+
+            <ul>
+
+                <li>Special Training Program</li>
+
+                <li>Personalized Guidance</li>
+
+                <li>Workout Support</li>
+
+                <li>Fitness Guidance</li>
+
+                <li>Trainer Support</li>
+
+            </ul>
+
+
+            <button
+                class="btn btn-primary"
+                onclick="goToPayment('Special Training', 2500)">
+
+                GET STARTED
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= GYM INFORMATION ================= -->
+
+<section class="section">
+
+    <div class="section-header">
+
+        <span class="tag">
+            GYM INFORMATION
+        </span>
+
+        <h2>
+            Train With Anjaneya Gym
+        </h2>
+
+    </div>
+
+
+    <div class="plans-grid">
+
+
+        <div class="plan-card">
+
+            <h3>
+                Gym Timings
+            </h3>
+
+            <ul>
+
+                <li>Morning: 5:00 AM – 10:00 AM</li>
+
+                <li>Evening: 5:00 PM – 10:00 PM</li>
+
+                <li>Every Sunday Evening Closed</li>
+
+            </ul>
+
+        </div>
+
+
+
+        <div class="plan-card">
+
+            <h3>
+                Coach
+            </h3>
+
+            <ul>
+
+                <li>Coach: Krishna Anna</li>
+
+                <li>Professional Gym Guidance</li>
+
+                <li>Workout Support</li>
+
+                <li>Fitness Assistance</li>
+
+            </ul>
+
+        </div>
+
+
+
+        <div class="plan-card">
+
+            <h3>
+                Why Join Us?
+            </h3>
+
+            <ul>
+
+                <li>Quality Gym Equipment</li>
+
+                <li>Strength Training</li>
+
+                <li>Cardio Training</li>
+
+                <li>Trainer Guidance</li>
+
+            </ul>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= CTA ================= -->
+
+<section class="cta">
+
+    <h2>
+        READY TO START YOUR FITNESS JOURNEY?
+    </h2>
+
+
+    <p>
+        Choose your membership plan and continue to secure payment.
+    </p>
+
+
+    <a href="#"
+       onclick="scrollToPlans(); return false;"
+       class="btn btn-primary">
+
+        VIEW MEMBERSHIP PLANS
+
+    </a>
+
+</section>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="footer-logo">
+        ANJANEYA GYM
+    </div>
+
+
+    <p>
+        Coach: Krishna Anna
+    </p>
+
+
+    <p>
+        © 2026 Anjaneya Gym. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+
+/*
+    When user clicks GET STARTED,
+    send the selected plan and amount
+    to payment.html.
+*/
+
+function goToPayment(plan, amount) {
+
+    const email =
+        localStorage.getItem("gymEmail");
+
+
+    /*
+        User should be logged in before
+        purchasing a membership.
+    */
+
+    if (!email) {
+
+        alert(
+            "Please login to your Anjaneya Gym account before purchasing a membership."
+        );
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    /*
+        Redirect to payment page
+        with selected plan and amount.
+    */
+
+    window.location.href =
+        "payment.html?plan="
+        + encodeURIComponent(plan)
+        + "&amount="
+        + encodeURIComponent(amount);
+
+}
+
+
+
+/*
+    Scroll to membership plans.
+*/
+
+function scrollToPlans() {
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

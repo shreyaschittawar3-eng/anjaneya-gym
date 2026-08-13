@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Payment Successful | Anjaneya Gym</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .success-page {
+
+            min-height: calc(100vh - 80px);
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 40px 20px;
+
+        }
+
+
+        .success-card {
+
+            width: 100%;
+
+            max-width: 650px;
+
+            background: #111;
+
+            border: 1px solid #333;
+
+            border-radius: 20px;
+
+            padding: 45px 35px;
+
+            text-align: center;
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.5);
+
+        }
+
+
+        .success-icon {
+
+            width: 90px;
+
+            height: 90px;
+
+            margin: 0 auto 25px;
+
+            border-radius: 50%;
+
+            background: #19c37d;
+
+            color: white;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 45px;
+
+            font-weight: bold;
+
+        }
+
+
+        .success-card h1 {
+
+            color: #fff;
+
+            font-size: 34px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .success-card p {
+
+            color: #999;
+
+            line-height: 1.6;
+
+        }
+
+
+        .payment-summary {
+
+            margin: 30px 0;
+
+            padding: 20px;
+
+            background: #181818;
+
+            border-radius: 12px;
+
+            border: 1px solid #333;
+
+        }
+
+
+        .summary-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 13px 0;
+
+            border-bottom: 1px solid #333;
+
+            color: #999;
+
+            text-align: left;
+
+        }
+
+
+        .summary-row:last-child {
+
+            border-bottom: none;
+
+        }
+
+
+        .summary-row strong {
+
+            color: #fff;
+
+            text-align: right;
+
+            word-break: break-word;
+
+        }
+
+
+        .success-status {
+
+            color: #19c37d !important;
+
+        }
+
+
+        .receipt-title {
+
+            color: #ff2020;
+
+            font-size: 18px;
+
+            margin-top: 10px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .success-buttons {
+
+            display: flex;
+
+            gap: 15px;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            margin-top: 25px;
+
+        }
+
+
+        .success-buttons a {
+
+            text-decoration: none;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="navbar">
+
+    <a href="index.html" class="logo">
+        ANJANEYA GYM
+    </a>
+
+    <nav class="nav-links">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="membership.html">
+            Membership
+        </a>
+
+        <a href="dashboard.html">
+            Dashboard
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<main class="success-page">
+
+    <div class="success-card">
+
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+
+        <h1>
+            Payment Successful
+        </h1>
+
+
+        <p>
+
+            Thank you for choosing
+            <strong>Anjaneya Gym</strong>.
+
+            Your payment has been successfully verified.
+
+        </p>
+
+
+        <div class="receipt-title">
+            PAYMENT RECEIPT
+        </div>
+
+
+        <div class="payment-summary">
+
+
+            <div class="summary-row">
+
+                <span>
+                    Receipt Number
+                </span>
+
+                <strong id="receiptNumber">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Member Email
+                </span>
+
+                <strong id="successEmail">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Membership
+                </span>
+
+                <strong id="successPlan">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Amount
+                </span>
+
+                <strong>
+                    ₹<span id="successAmount">0</span>
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Payment Method
+                </span>
+
+                <strong id="paymentMethod">
+                    Razorpay
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Payment Status
+                </span>
+
+                <strong id="paymentStatus"
+                        class="success-status">
+
+                    PAYMENT_SUCCESS
+
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Razorpay Order ID
+                </span>
+
+                <strong id="orderId">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Razorpay Payment ID
+                </span>
+
+                <strong id="paymentId">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Payment Date
+                </span>
+
+                <strong id="paymentDate">
+                    -
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <p>
+
+            Your payment receipt has been recorded
+            successfully in the Anjaneya Gym system.
+
+        </p>
+
+
+        <div class="success-buttons">
+
+            <a href="dashboard.html"
+               class="btn btn-primary">
+
+                GO TO DASHBOARD
+
+            </a>
+
+
+            <a href="membership.html"
+               class="btn btn-secondary">
+
+                VIEW MEMBERSHIPS
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+
+<script>
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    document.getElementById(
+        "receiptNumber"
+    ).textContent =
+        params.get("receiptNumber") || "-";
+
+
+    document.getElementById(
+        "successEmail"
+    ).textContent =
+        params.get("email") || "-";
+
+
+    document.getElementById(
+        "successPlan"
+    ).textContent =
+        params.get("plan") || "-";
+
+
+    document.getElementById(
+        "successAmount"
+    ).textContent =
+        params.get("amount") || "0";
+
+
+    document.getElementById(
+        "paymentMethod"
+    ).textContent =
+        params.get("paymentMethod") || "Razorpay";
+
+
+    document.getElementById(
+        "paymentStatus"
+    ).textContent =
+        params.get("paymentStatus") || "PAYMENT_SUCCESS";
+
+
+    document.getElementById(
+        "orderId"
+    ).textContent =
+        params.get("orderId") || "-";
+
+
+    document.getElementById(
+        "paymentId"
+    ).textContent =
+        params.get("paymentId") || "-";
+
+
+    document.getElementById(
+        "paymentDate"
+    ).textContent =
+        params.get("paymentDate") || "-";
+
+</script>
+
+
+</body>
+
+</html>

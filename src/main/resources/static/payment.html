@@ -1,0 +1,1948 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Payment | Anjaneya Gym</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Razorpay Checkout -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+
+    <style>
+
+        /* =====================================================
+           PAYMENT PAGE
+        ===================================================== */
+
+        .payment-page {
+
+            min-height: calc(100vh - 80px);
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 50px 20px;
+        }
+
+
+        .payment-container {
+
+            width: 100%;
+
+            max-width: 650px;
+        }
+
+
+        .payment-card {
+
+            background: #111;
+
+            border: 1px solid #333;
+
+            border-radius: 20px;
+
+            padding: 40px;
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.5);
+        }
+
+
+        .payment-header {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+        }
+
+
+        .payment-icon {
+
+            width: 80px;
+
+            height: 80px;
+
+            margin: 0 auto 20px;
+
+            border-radius: 50%;
+
+            background: #ff2020;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 40px;
+
+        }
+
+
+        .payment-header h1 {
+
+            color: #fff;
+
+            margin-bottom: 10px;
+
+            font-size: 32px;
+        }
+
+
+        .payment-header p {
+
+            color: #999;
+
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           PAYMENT DETAILS
+        ===================================================== */
+
+        .payment-details {
+
+            background: #181818;
+
+            border: 1px solid #333;
+
+            border-radius: 14px;
+
+            padding: 20px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .payment-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+            padding: 14px 0;
+
+            border-bottom: 1px solid #333;
+
+            color: #999;
+        }
+
+
+        .payment-row:last-child {
+
+            border-bottom: none;
+        }
+
+
+        .payment-row strong {
+
+            color: #fff;
+
+            text-align: right;
+        }
+
+
+        .amount-value {
+
+            color: #00ff88 !important;
+
+            font-size: 22px;
+        }
+
+
+        /* =====================================================
+           MEMBER EMAIL
+        ===================================================== */
+
+        .member-email {
+
+            word-break: break-word;
+        }
+
+
+        /* =====================================================
+           PAYMENT BUTTON
+        ===================================================== */
+
+        .payment-button {
+
+            width: 100%;
+
+            border: none;
+
+            cursor: pointer;
+
+            font-size: 16px;
+
+            padding: 15px;
+
+            margin-top: 10px;
+        }
+
+
+        .payment-button:disabled {
+
+            opacity: 0.6;
+
+            cursor: not-allowed;
+        }
+
+
+        /* =====================================================
+           MESSAGE
+        ===================================================== */
+
+        #paymentMessage {
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #999;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           SUCCESS RECEIPT
+        ===================================================== */
+
+        #successBox {
+
+            display: none;
+
+            margin-top: 30px;
+
+            background: #111;
+
+            border: 1px solid #00ff88;
+
+            border-radius: 18px;
+
+            padding: 30px;
+        }
+
+
+        .success-icon {
+
+            width: 75px;
+
+            height: 75px;
+
+            margin: 0 auto 20px;
+
+            border-radius: 50%;
+
+            background: #00c853;
+
+            color: #fff;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 38px;
+        }
+
+
+        .success-title {
+
+            text-align: center;
+
+            color: #00ff88;
+
+            font-size: 28px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .success-description {
+
+            text-align: center;
+
+            color: #999;
+
+            margin-bottom: 25px;
+
+            line-height: 1.6;
+        }
+
+
+        .receipt-title {
+
+            text-align: center;
+
+            color: #fff;
+
+            margin-bottom: 20px;
+
+            font-size: 20px;
+        }
+
+
+        .reference-id {
+
+            word-break: break-all;
+
+            color: #fff !important;
+
+            font-size: 13px;
+        }
+
+
+        .status-success {
+
+            color: #00ff88 !important;
+
+            font-weight: bold;
+        }
+
+
+        /* =====================================================
+           SUCCESS BUTTONS
+        ===================================================== */
+
+        .success-buttons {
+
+            display: flex;
+
+            gap: 15px;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            margin-top: 25px;
+        }
+
+
+        .success-buttons a {
+
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 600px) {
+
+            .payment-card {
+
+                padding: 25px 18px;
+            }
+
+
+            .payment-header h1 {
+
+                font-size: 26px;
+            }
+
+
+            .payment-row {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 5px;
+            }
+
+
+            .payment-row strong {
+
+                text-align: left;
+            }
+
+
+            .reference-id {
+
+                text-align: left !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<header class="navbar">
+
+    <a href="index.html"
+       class="logo">
+
+        ANJANEYA GYM
+
+    </a>
+
+
+    <nav class="nav-links">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="membership.html">
+            Membership
+        </a>
+
+        <a href="dashboard.html">
+            Dashboard
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================================================
+     PAYMENT PAGE
+========================================================= -->
+
+<main class="payment-page">
+
+    <div class="payment-container">
+
+
+        <div class="payment-card">
+
+
+            <!-- =================================================
+                 PAYMENT HEADER
+            ================================================== -->
+
+            <div class="payment-header">
+
+
+                <div class="payment-icon">
+
+                    💳
+
+                </div>
+
+
+                <h1>
+
+                    Gym Membership Payment
+
+                </h1>
+
+
+                <p>
+
+                    Complete your membership payment securely
+                    using Razorpay.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PAYMENT DETAILS
+            ================================================== -->
+
+            <div class="payment-details">
+
+
+                <div class="payment-row">
+
+                    <span>
+                        Member Email
+                    </span>
+
+                    <strong
+                        id="memberEmailPreview"
+                        class="member-email">
+
+                        Loading...
+
+                    </strong>
+
+                </div>
+
+
+
+                <div class="payment-row">
+
+                    <span>
+                        Membership Plan
+                    </span>
+
+                    <strong id="plan">
+
+                        Loading...
+
+                    </strong>
+
+                </div>
+
+
+
+                <div class="payment-row">
+
+                    <span>
+                        Amount
+                    </span>
+
+                    <strong
+                        id="amount"
+                        class="amount-value">
+
+                        Calculating...
+
+                    </strong>
+
+                </div>
+
+
+
+                <div class="payment-row">
+
+                    <span>
+                        Duration
+                    </span>
+
+                    <strong id="duration">
+
+                        30 Days
+
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PAYMENT BUTTON
+            ================================================== -->
+
+            <button
+                id="paymentButton"
+                class="btn btn-primary payment-button">
+
+                PAY NOW
+
+            </button>
+
+
+            <!-- =================================================
+                 PAYMENT MESSAGE
+            ================================================== -->
+
+            <p id="paymentMessage">
+
+                Your payment will be securely processed
+                through Razorpay.
+
+            </p>
+
+
+
+            <!-- =================================================
+                 SUCCESS RECEIPT
+            ================================================== -->
+
+            <div id="successBox">
+
+
+                <div class="success-icon">
+
+                    ✓
+
+                </div>
+
+
+                <h2 class="success-title">
+
+                    Payment Successful
+
+                </h2>
+
+
+                <p class="success-description">
+
+                    Your payment has been successfully
+                    verified and recorded by Anjaneya Gym.
+
+                </p>
+
+
+                <h3 class="receipt-title">
+
+                    Payment Receipt
+
+                </h3>
+
+
+                <div class="payment-details">
+
+
+                    <!-- RECEIPT NUMBER -->
+
+                    <div
+                        class="payment-row"
+                        id="receiptNumberRow">
+
+                        <span>
+                            Receipt Number
+                        </span>
+
+                        <strong
+                            id="receiptNumber"
+                            class="reference-id">
+
+                            -
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- EMAIL -->
+
+                    <div class="payment-row">
+
+                        <span>
+                            Member Email
+                        </span>
+
+                        <strong
+                            id="receiptEmail"
+                            class="member-email">
+
+                            -
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- PLAN -->
+
+                    <div class="payment-row">
+
+                        <span>
+                            Membership Plan
+                        </span>
+
+                        <strong id="receiptPlan">
+
+                            -
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- AMOUNT -->
+
+                    <div class="payment-row">
+
+                        <span>
+                            Amount Paid
+                        </span>
+
+                        <strong
+                            id="receiptAmount"
+                            class="amount-value">
+
+                            -
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- DURATION -->
+
+                    <div class="payment-row">
+
+                        <span>
+                            Duration
+                        </span>
+
+                        <strong id="receiptDuration">
+
+                            -
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- PAYMENT METHOD -->
+
+                    <div class="payment-row">
+
+                        <span>
+                            Payment Method
+                        </span>
+
+                        <strong id="receiptPaymentMethod">
+
+                            Razorpay
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- PAYMENT STATUS -->
+
+                    <div class="payment-row">
+
+                        <span>
+                            Payment Status
+                        </span>
+
+                        <strong
+                            id="receiptPaymentStatus"
+                            class="status-success">
+
+                            PAYMENT_SUCCESS
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- PAYMENT ID -->
+
+                    <div class="payment-row">
+
+                        <span>
+                            Razorpay Payment ID
+                        </span>
+
+                        <strong
+                            id="paymentId"
+                            class="reference-id">
+
+                            -
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- ORDER ID -->
+
+                    <div class="payment-row">
+
+                        <span>
+                            Razorpay Order ID
+                        </span>
+
+                        <strong
+                            id="orderId"
+                            class="reference-id">
+
+                            -
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- PAYMENT DATE -->
+
+                    <div class="payment-row">
+
+                        <span>
+                            Payment Date
+                        </span>
+
+                        <strong id="paymentDate">
+
+                            -
+
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     SUCCESS BUTTONS
+                ================================================== -->
+
+                <div class="success-buttons">
+
+
+                    <a
+                        href="dashboard.html"
+                        class="btn btn-primary">
+
+                        GO TO DASHBOARD
+
+                    </a>
+
+
+                    <a
+                        href="membership.html"
+                        class="btn btn-secondary">
+
+                        VIEW MEMBERSHIPS
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</main>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+
+/* =========================================================
+   GET URL PARAMETERS
+========================================================= */
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const plan =
+    urlParams.get("plan");
+
+
+const amountFromUrl =
+    urlParams.get("amount");
+
+
+
+/* =========================================================
+   CHECK PLAN
+========================================================= */
+
+if (!plan) {
+
+    alert(
+        "Membership plan information is missing."
+    );
+
+    window.location.href =
+        "membership.html";
+}
+
+
+
+/* =========================================================
+   GET LOGGED-IN EMAIL
+========================================================= */
+
+const email =
+    localStorage.getItem("gymEmail")
+    ||
+    localStorage.getItem("userEmail");
+
+
+
+/* =========================================================
+   CHECK LOGIN
+========================================================= */
+
+if (!email) {
+
+    alert(
+        "Please login before making a payment."
+    );
+
+    window.location.href =
+        "login.html";
+}
+
+
+
+/* =========================================================
+   MEMBERSHIP DURATION
+========================================================= */
+
+let duration =
+    "30 Days";
+
+
+if (
+    plan === "Strength Admission" ||
+    plan === "Cardio Admission"
+) {
+
+    duration =
+        "Admission";
+
+}
+
+else if (
+    plan === "Strength Monthly" ||
+    plan === "Cardio Monthly"
+) {
+
+    duration =
+        "30 Days";
+
+}
+
+else if (
+    plan === "Strength 3 Months" ||
+    plan === "Cardio 3 Months"
+) {
+
+    duration =
+        "3 Months";
+
+}
+
+else if (
+    plan === "Strength 6 Months" ||
+    plan === "Cardio 6 Months"
+) {
+
+    duration =
+        "6 Months";
+
+}
+
+else if (
+    plan === "Cardio 6 Months"
+) {
+
+    duration =
+        "6 Months";
+
+}
+
+else if (
+    plan === "Special Training"
+) {
+
+    duration =
+        "Special Training";
+}
+
+
+
+/* =========================================================
+   DISPLAY INITIAL DETAILS
+========================================================= */
+
+document
+    .getElementById("plan")
+    .innerText =
+        plan;
+
+
+document
+    .getElementById("amount")
+    .innerText =
+        amountFromUrl
+            ? "₹" + amountFromUrl
+            : "Calculating...";
+
+
+document
+    .getElementById("duration")
+    .innerText =
+        duration;
+
+
+document
+    .getElementById(
+        "memberEmailPreview"
+    )
+    .innerText =
+        email;
+
+
+
+/* =========================================================
+   PAYMENT BUTTON
+========================================================= */
+
+document
+    .getElementById(
+        "paymentButton"
+    )
+    .addEventListener(
+        "click",
+        createRazorpayOrder
+    );
+
+
+
+/* =========================================================
+   CREATE RAZORPAY ORDER
+========================================================= */
+
+async function createRazorpayOrder() {
+
+
+    const button =
+        document.getElementById(
+            "paymentButton"
+        );
+
+
+    const message =
+        document.getElementById(
+            "paymentMessage"
+        );
+
+
+    if (!email) {
+
+        alert(
+            "Please login before making payment."
+        );
+
+        window.location.href =
+            "login.html";
+
+        return;
+    }
+
+
+    if (!plan) {
+
+        message.innerText =
+            "Membership plan is missing.";
+
+        message.style.color =
+            "#ff4444";
+
+        return;
+    }
+
+
+    button.disabled =
+        true;
+
+
+    button.innerText =
+        "CREATING PAYMENT...";
+
+
+    message.innerText =
+        "Connecting to Razorpay...";
+
+
+    message.style.color =
+        "#ffaa00";
+
+
+    try {
+
+
+        /* =================================================
+           CREATE ORDER IN SPRING BOOT
+        ================================================= */
+
+        const response =
+            await fetch(
+                "/api/razorpay/create-order",
+                {
+
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            email:
+                                email,
+
+                            plan:
+                                plan,
+
+                            amount:
+                                amountFromUrl
+                                    ? Number(
+                                        amountFromUrl
+                                      )
+                                    : 0
+
+                        })
+
+                }
+            );
+
+
+
+        const responseText =
+            await response.text();
+
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                responseText ||
+                "Unable to create Razorpay order."
+            );
+        }
+
+
+
+        let orderData;
+
+
+        try {
+
+            orderData =
+                JSON.parse(
+                    responseText
+                );
+
+        }
+
+        catch (error) {
+
+            throw new Error(
+                "Invalid response received from server."
+            );
+        }
+
+
+
+        /* =================================================
+           CHECK ORDER DATA
+        ================================================= */
+
+        if (
+            !orderData.keyId ||
+            !orderData.orderId ||
+            !orderData.amount
+        ) {
+
+            throw new Error(
+                "Razorpay order information is incomplete."
+            );
+        }
+
+
+
+        /* =================================================
+           BACKEND AMOUNT
+        ================================================= */
+
+        const actualAmount =
+            Number(
+                orderData.amount
+            ) / 100;
+
+
+
+        document
+            .getElementById("amount")
+            .innerText =
+                "₹" +
+                actualAmount;
+
+
+
+        /* =================================================
+           RAZORPAY OPTIONS
+        ================================================= */
+
+        const options = {
+
+
+            key:
+                orderData.keyId,
+
+
+            amount:
+                orderData.amount,
+
+
+            currency:
+                "INR",
+
+
+            name:
+                "Anjaneya Gym",
+
+
+            description:
+                plan,
+
+
+            order_id:
+                orderData.orderId,
+
+
+            prefill: {
+
+                email:
+                    email
+
+            },
+
+
+            notes: {
+
+                email:
+                    email,
+
+                plan:
+                    plan
+
+            },
+
+
+            theme: {
+
+                color:
+                    "#ff1717"
+
+            },
+
+
+            /* =============================================
+               SUCCESS CALLBACK
+            ============================================= */
+
+            handler:
+                async function(
+                    razorpayResponse
+                ) {
+
+                    await verifyPayment(
+                        razorpayResponse,
+                        actualAmount
+                    );
+
+                },
+
+
+            /* =============================================
+               RAZORPAY WINDOW CLOSED
+            ============================================= */
+
+            modal: {
+
+                ondismiss:
+                    function() {
+
+
+                        button.disabled =
+                            false;
+
+
+                        button.innerText =
+                            "PAY NOW";
+
+
+                        message.innerText =
+                            "Payment window closed.";
+
+
+                        message.style.color =
+                            "#ffaa00";
+
+                    }
+
+            }
+
+        };
+
+
+
+        /* =================================================
+           OPEN RAZORPAY
+        ================================================= */
+
+        const razorpay =
+            new Razorpay(
+                options
+            );
+
+
+
+        /* =================================================
+           PAYMENT FAILED
+        ================================================= */
+
+        razorpay.on(
+            "payment.failed",
+            function(response) {
+
+
+                console.error(
+                    "Razorpay Payment Failed:",
+                    response
+                );
+
+
+                button.disabled =
+                    false;
+
+
+                button.innerText =
+                    "PAY NOW";
+
+
+                message.innerText =
+                    "Payment failed. Please try again.";
+
+
+                message.style.color =
+                    "#ff4444";
+
+            }
+        );
+
+
+
+        razorpay.open();
+
+
+
+        message.innerText =
+            "Razorpay payment window opened.";
+
+
+        message.style.color =
+            "#32ff7e";
+
+
+    }
+
+    catch (error) {
+
+
+        console.error(
+            "Razorpay Order Error:",
+            error
+        );
+
+
+        button.disabled =
+            false;
+
+
+        button.innerText =
+            "PAY NOW";
+
+
+        message.innerText =
+            error.message ||
+            "Unable to create Razorpay order.";
+
+
+        message.style.color =
+            "#ff4444";
+
+    }
+
+}
+
+
+
+/* =========================================================
+   VERIFY PAYMENT
+========================================================= */
+
+async function verifyPayment(
+    razorpayResponse,
+    actualAmount
+) {
+
+
+    const button =
+        document.getElementById(
+            "paymentButton"
+        );
+
+
+    const message =
+        document.getElementById(
+            "paymentMessage"
+        );
+
+
+
+    button.disabled =
+        true;
+
+
+    button.innerText =
+        "VERIFYING PAYMENT...";
+
+
+    message.innerText =
+        "Verifying your Razorpay payment...";
+
+
+    message.style.color =
+        "#ffaa00";
+
+
+
+    try {
+
+
+        /* =================================================
+           SEND PAYMENT DATA TO BACKEND
+        ================================================= */
+
+        const verificationData = {
+
+
+            razorpay_order_id:
+                razorpayResponse
+                    .razorpay_order_id,
+
+
+            razorpay_payment_id:
+                razorpayResponse
+                    .razorpay_payment_id,
+
+
+            razorpay_signature:
+                razorpayResponse
+                    .razorpay_signature,
+
+
+            email:
+                email,
+
+
+            plan:
+                plan,
+
+
+            paymentMethod:
+                "Razorpay"
+
+        };
+
+
+
+        const response =
+            await fetch(
+                "/api/razorpay/verify-payment",
+                {
+
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify(
+                            verificationData
+                        )
+
+                }
+            );
+
+
+
+        const responseText =
+            await response.text();
+
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                responseText ||
+                "Payment verification failed."
+            );
+
+        }
+
+
+
+        let result;
+
+
+        try {
+
+            result =
+                JSON.parse(
+                    responseText
+                );
+
+        }
+
+        catch (error) {
+
+            throw new Error(
+                "Invalid verification response from server."
+            );
+
+        }
+
+
+
+        /* =================================================
+           CHECK BACKEND STATUS
+        ================================================= */
+
+        if (
+            result.status !==
+            "SUCCESS"
+        ) {
+
+            throw new Error(
+                result.message ||
+                "Payment verification failed."
+            );
+
+        }
+
+
+
+        /* =================================================
+           GET PAYMENT OBJECT
+        ================================================= */
+
+        const payment =
+            result.payment ||
+            {};
+
+
+
+        /* =================================================
+           PAYMENT INFORMATION
+        ================================================= */
+
+        const verifiedEmail =
+            payment.email ||
+            email;
+
+
+        const verifiedPlan =
+            payment.plan ||
+            plan;
+
+
+        const verifiedAmount =
+            payment.amount ||
+            actualAmount;
+
+
+        const verifiedPaymentMethod =
+            payment.paymentMethod ||
+            "Razorpay";
+
+
+        const verifiedStatus =
+            payment.paymentStatus ||
+            "PAYMENT_SUCCESS";
+
+
+        const verifiedPaymentDate =
+            payment.paymentDate ||
+            new Date()
+                .toISOString();
+
+
+
+        const verifiedPaymentId =
+            result.paymentId ||
+            razorpayResponse
+                .razorpay_payment_id;
+
+
+        const verifiedOrderId =
+            payment.razorpayOrderId ||
+            razorpayResponse
+                .razorpay_order_id;
+
+
+
+        /* =================================================
+           GENERATE WEBSITE RECEIPT NUMBER
+        ================================================= */
+
+        const receiptNumber =
+            "AGYM-" +
+            Date.now();
+
+
+
+        /* =================================================
+           DISPLAY RECEIPT
+        ================================================= */
+
+        document
+            .getElementById(
+                "receiptNumber"
+            )
+            .innerText =
+                receiptNumber;
+
+
+
+        document
+            .getElementById(
+                "receiptEmail"
+            )
+            .innerText =
+                verifiedEmail;
+
+
+
+        document
+            .getElementById(
+                "receiptPlan"
+            )
+            .innerText =
+                verifiedPlan;
+
+
+
+        document
+            .getElementById(
+                "receiptAmount"
+            )
+            .innerText =
+                "₹" +
+                verifiedAmount;
+
+
+
+        document
+            .getElementById(
+                "receiptDuration"
+            )
+            .innerText =
+                duration;
+
+
+
+        document
+            .getElementById(
+                "receiptPaymentMethod"
+            )
+            .innerText =
+                verifiedPaymentMethod;
+
+
+
+        document
+            .getElementById(
+                "receiptPaymentStatus"
+            )
+            .innerText =
+                verifiedStatus;
+
+
+
+        document
+            .getElementById(
+                "paymentId"
+            )
+            .innerText =
+                verifiedPaymentId;
+
+
+
+        document
+            .getElementById(
+                "orderId"
+            )
+            .innerText =
+                verifiedOrderId;
+
+
+
+        document
+            .getElementById(
+                "paymentDate"
+            )
+            .innerText =
+                formatPaymentDate(
+                    verifiedPaymentDate
+                );
+
+
+
+        /* =================================================
+           SAVE RECEIPT LOCALLY
+        ================================================= */
+
+        const paymentDetails = {
+
+
+            receiptNumber:
+                receiptNumber,
+
+
+            email:
+                verifiedEmail,
+
+
+            gym:
+                "Anjaneya Gym",
+
+
+            plan:
+                verifiedPlan,
+
+
+            amount:
+                verifiedAmount,
+
+
+            duration:
+                duration,
+
+
+            paymentMethod:
+                verifiedPaymentMethod,
+
+
+            paymentStatus:
+                verifiedStatus,
+
+
+            paymentDate:
+                verifiedPaymentDate,
+
+
+            paymentId:
+                verifiedPaymentId,
+
+
+            orderId:
+                verifiedOrderId
+
+        };
+
+
+
+        localStorage.setItem(
+            "lastPayment",
+            JSON.stringify(
+                paymentDetails
+            )
+        );
+
+
+        localStorage.setItem(
+            "paymentPlan",
+            verifiedPlan
+        );
+
+
+        localStorage.setItem(
+            "paymentAmount",
+            verifiedAmount
+        );
+
+
+        localStorage.setItem(
+            "paymentStatus",
+            verifiedStatus
+        );
+
+
+        localStorage.setItem(
+            "paymentReceipt",
+            receiptNumber
+        );
+
+
+
+        /* =================================================
+           SHOW SUCCESS RECEIPT
+        ================================================= */
+
+        document
+            .getElementById(
+                "successBox"
+            )
+            .style.display =
+                "block";
+
+
+
+        button.style.display =
+            "none";
+
+
+        message.style.display =
+            "none";
+
+
+
+        /* =================================================
+           SCROLL TO RECEIPT
+        ================================================= */
+
+        document
+            .getElementById(
+                "successBox"
+            )
+            .scrollIntoView({
+
+                behavior:
+                    "smooth"
+
+            });
+
+    }
+
+
+    catch (error) {
+
+
+        console.error(
+            "Payment Verification Error:",
+            error
+        );
+
+
+        button.disabled =
+            false;
+
+
+        button.innerText =
+            "PAY NOW";
+
+
+        message.innerText =
+            error.message ||
+            "Payment verification failed.";
+
+
+        message.style.color =
+            "#ff4444";
+
+    }
+
+}
+
+
+
+/* =========================================================
+   FORMAT DATE
+========================================================= */
+
+function formatPaymentDate(
+    value
+) {
+
+
+    if (!value) {
+
+        return "-";
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+
+    if (
+        !isNaN(
+            date.getTime()
+        )
+    ) {
+
+
+        return date.toLocaleString(
+            "en-IN",
+            {
+
+                dateStyle:
+                    "medium",
+
+                timeStyle:
+                    "short"
+
+            }
+        );
+
+    }
+
+
+    return value;
+
+}
+
+</script>
+
+
+</body>
+
+</html>

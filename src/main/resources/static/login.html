@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login | Anjaneya Gym</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header class="navbar">
+
+    <a href="index.html"
+       class="logo">
+
+        ANJANEYA GYM
+
+    </a>
+
+
+    <nav class="nav-links">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="membership.html">
+            Membership
+        </a>
+
+        <a href="register.html">
+            Register
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<main class="auth-page">
+
+
+    <div class="auth-container">
+
+
+        <div class="auth-card">
+
+
+            <div class="auth-header">
+
+                <div class="auth-icon">
+                    🏋️
+                </div>
+
+
+                <h1>
+                    Welcome Back!
+                </h1>
+
+
+                <p>
+                    Login to continue your fitness journey
+                </p>
+
+            </div>
+
+
+
+            <form id="loginForm">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Gmail Address
+                    </label>
+
+
+                    <input
+                        type="email"
+                        id="email"
+                        class="form-control"
+                        placeholder="Enter your registered Gmail"
+                        required>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Gym App Password
+                    </label>
+
+
+                    <input
+                        type="password"
+                        id="password"
+                        class="form-control"
+                        placeholder="Enter your gym password"
+                        required>
+
+                </div>
+
+
+
+                <button
+                    type="submit"
+                    class="btn btn-primary auth-button">
+
+                    LOGIN
+
+                </button>
+
+
+            </form>
+
+
+
+            <p id="message"
+               style="margin-top:20px;">
+            </p>
+
+
+
+            <div class="auth-footer">
+
+                Don't have an account?
+
+                <a href="register.html">
+                    Register Now
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</main>
+
+
+
+<script>
+
+document
+    .getElementById("loginForm")
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const email =
+                document
+                    .getElementById("email")
+                    .value
+                    .trim()
+                    .toLowerCase();
+
+
+            const password =
+                document
+                    .getElementById("password")
+                    .value;
+
+
+            const message =
+                document
+                    .getElementById("message");
+
+
+            message.innerText =
+                "Checking your account...";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/members/login",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+
+                                email: email,
+
+                                password: password
+
+                            })
+                        }
+                    );
+
+
+                const result =
+                    await response.text();
+
+
+
+                /*
+                 * =========================================
+                 * LOGIN SUCCESS
+                 * =========================================
+                 */
+
+                if (result ===
+                    "LOGIN_SUCCESS") {
+
+
+                    /*
+                     * Existing storage used by
+                     * your dashboard.
+                     */
+
+                    localStorage.setItem(
+                        "gymEmail",
+                        email
+                    );
+
+
+                    /*
+                     * New storage used by
+                     * the payment system.
+                     */
+
+                    localStorage.setItem(
+                        "userEmail",
+                        email
+                    );
+
+
+                    /*
+                     * Store login status.
+                     */
+
+                    localStorage.setItem(
+                        "loggedIn",
+                        "true"
+                    );
+
+
+                    message.innerText =
+                        "Login successful! Opening dashboard...";
+
+
+                    message.style.color =
+                        "#00ff88";
+
+
+                    setTimeout(function() {
+
+                        window.location.href =
+                            "dashboard.html";
+
+                    }, 800);
+
+
+                }
+
+
+                /*
+                 * =========================================
+                 * EMAIL NOT REGISTERED
+                 * =========================================
+                 */
+
+                else if (result ===
+                    "EMAIL_NOT_REGISTERED") {
+
+
+                    message.innerText =
+                        "This Gmail is not registered. Please create an account first.";
+
+
+                    message.style.color =
+                        "#ff4444";
+
+                }
+
+
+                /*
+                 * =========================================
+                 * EMAIL NOT VERIFIED
+                 * =========================================
+                 */
+
+                else if (result ===
+                    "EMAIL_NOT_VERIFIED") {
+
+
+                    message.innerText =
+                        "Your Gmail is not verified. Please complete OTP verification during registration.";
+
+
+                    message.style.color =
+                        "#ff4444";
+
+                }
+
+
+                /*
+                 * =========================================
+                 * INVALID PASSWORD
+                 * =========================================
+                 */
+
+                else if (result ===
+                    "INVALID_PASSWORD") {
+
+
+                    message.innerText =
+                        "Incorrect gym password.";
+
+
+                    message.style.color =
+                        "#ff4444";
+
+                }
+
+
+                /*
+                 * =========================================
+                 * OTHER LOGIN ERROR
+                 * =========================================
+                 */
+
+                else {
+
+
+                    message.innerText =
+                        "Login failed. Please try again.";
+
+
+                    message.style.color =
+                        "#ff4444";
+
+                }
+
+
+            }
+
+
+            catch (error) {
+
+
+                console.error(error);
+
+
+                message.innerText =
+                    "Unable to connect to the server.";
+
+
+                message.style.color =
+                    "#ff4444";
+
+            }
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>
